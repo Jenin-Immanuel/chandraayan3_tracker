@@ -80,40 +80,14 @@ Geodetic Coordinates:longitude=${longitudeDeg.toFixed(
 const postTweet = async (tweet) => {
   try {
     await T.readWrite.v2.tweet(tweet);
-    console.log("Successfully tweeted");
   } catch (err) {
     console.error(err);
   }
 };
 
-// Post a tweet every 30 min
-
 const main = async () => {
   const t = await action();
   postTweet(t);
-  const interval = setInterval(async () => {
-    const tweet = await action();
-    postTweet(tweet);
-  }, 1000 * 60 * 30);
-  process.on("SIGINT", function () {
-    console.log("\nHappy Moon Landing!");
-    clearInterval(interval);
-    process.exit();
-  });
 };
 
 main();
-
-// const PORT = process.env.PORT || 5000;
-
-// app.get("/", (req, res) => {
-//   res.status(200).send("Hello");
-// });
-
-// app.listen(PORT, (err) => {
-//   if (err) {
-//     console.error(err);
-//   } else {
-//     console.log("Server established at http://0.0.0.0:" + PORT);
-//   }
-// });
