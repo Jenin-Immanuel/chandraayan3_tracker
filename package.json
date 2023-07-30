@@ -12,7 +12,6 @@
     "dotenv": "^16.3.1",
     "satellite.js": "^5.0.0",
     "superagent": "^8.0.9",
-    "twit": "^2.2.11",
     "twitter-api-v2": "^1.15.1"
   }
 }
