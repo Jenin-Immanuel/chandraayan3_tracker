@@ -2,7 +2,7 @@ require("dotenv").config();
 const superagent = require("superagent");
 const satellite = require("satellite.js");
 const { TwitterApi } = require("twitter-api-v2");
-
+const http = require("http");
 const T = new TwitterApi({
   appKey: process.env.APP_KEY,
   appSecret: process.env.APP_SECRET,
@@ -12,17 +12,7 @@ const T = new TwitterApi({
 
 const url = process.env.CHANDRAAYAN_URL;
 
-const postTweet = async (tweet) => {
-  try {
-    await T.readWrite.v2.tweet(tweet);
-    console.log("Successfully tweeted");
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-// Post a tweet every 30 min
-const interval = setInterval(async () => {
+const action = async () => {
   const res = await superagent.get(url);
   const tle = res.text;
   const satrec = satellite.twoline2satrec(
@@ -83,8 +73,35 @@ Geodetic Coordinates:longitude=${longitudeDeg.toFixed(
     3
   )},latitude=${latitudeDeg.toFixed(3)}
 #chandraayan3 #india #ISRO #space #moon`;
+};
+
+const postTweet = async (tweet) => {
+  try {
+    await T.readWrite.v2.tweet(tweet);
+    console.log("Successfully tweeted");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const t = action()
+  .then((res) => res)
+  .catch((err) => console.log(err));
+postTweet(t);
+
+// Post a tweet every 30 min
+const interval = setInterval(async () => {
+  const tweet = await action();
   postTweet(tweet);
 }, 1000 * 60 * 30);
+
+http
+  .createServer(function (req, res) {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.write("Hello World!");
+    res.end();
+  })
+  .listen(process.env.PORT || 8080);
 
 process.on("SIGINT", function () {
   console.log("\nHappy Moon Landing!");
