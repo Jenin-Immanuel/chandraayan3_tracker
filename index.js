@@ -3,7 +3,6 @@ const superagent = require("superagent");
 const satellite = require("satellite.js");
 const { TwitterApi } = require("twitter-api-v2");
 
-const app = express();
 const T = new TwitterApi({
   appKey: process.env.APP_KEY,
   appSecret: process.env.APP_SECRET,
