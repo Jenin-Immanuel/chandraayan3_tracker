@@ -73,6 +73,7 @@ Geodetic Coordinates:longitude=${longitudeDeg.toFixed(
     3
   )},latitude=${latitudeDeg.toFixed(3)}
 #chandraayan3 #india #ISRO #space #moon`;
+  return tweet;
 };
 
 const postTweet = async (tweet) => {
@@ -84,27 +85,20 @@ const postTweet = async (tweet) => {
   }
 };
 
-const t = action()
-  .then((res) => res)
-  .catch((err) => console.log(err));
-postTweet(t);
-
 // Post a tweet every 30 min
-const interval = setInterval(async () => {
-  const tweet = await action();
-  postTweet(tweet);
-}, 1000 * 60 * 30);
 
-http
-  .createServer(function (req, res) {
-    res.writeHead(200, { "Content-Type": "text/plain" });
-    res.write("Hello World!");
-    res.end();
-  })
-  .listen(process.env.PORT || 8080);
+const main = async () => {
+  const t = await action();
+  postTweet(t);
+  const interval = setInterval(async () => {
+    const tweet = await action();
+    postTweet(tweet);
+  }, 1000 * 60 * 30);
+  process.on("SIGINT", function () {
+    console.log("\nHappy Moon Landing!");
+    clearInterval(interval);
+    process.exit();
+  });
+};
 
-process.on("SIGINT", function () {
-  console.log("\nHappy Moon Landing!");
-  clearInterval(interval);
-  process.exit();
-});
+main();
