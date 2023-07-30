@@ -1,0 +1,18 @@
+{
+  "name": "chandraayan3_tracker",
+  "type": "commonjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "satellite.js": "^5.0.0",
+    "superagent": "^8.0.9",
+    "twit": "^2.2.11",
+    "twitter-api-v2": "^1.15.1"
+  }
+}
