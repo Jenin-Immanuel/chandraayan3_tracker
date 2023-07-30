@@ -115,6 +115,6 @@ app.listen(PORT, (err) => {
   if (err) {
     console.error(err);
   } else {
-    console.log("Server established at http://localhost:" + PORT);
+    console.log("Server established at http://0.0.0.0:" + PORT);
   }
 });
