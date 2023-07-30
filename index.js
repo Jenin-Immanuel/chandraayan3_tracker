@@ -84,7 +84,7 @@ Geodetic Coordinates:longitude=${longitudeDeg.toFixed(
   )},latitude=${latitudeDeg.toFixed(3)}
 #chandraayan3 #india #ISRO #space #moon`;
   postTweet(tweet);
-}, 1000 * 2);
+}, 1000 * 60 * 30);
 
 process.on("SIGINT", function () {
   console.log("\nHappy Moon Landing!");
