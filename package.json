@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.3.1",
+    "express": "^4.18.2",
     "satellite.js": "^5.0.0",
     "superagent": "^8.0.9",
     "twitter-api-v2": "^1.15.1"
