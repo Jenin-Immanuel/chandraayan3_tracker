@@ -2,7 +2,6 @@ require("dotenv").config();
 const superagent = require("superagent");
 const satellite = require("satellite.js");
 const { TwitterApi } = require("twitter-api-v2");
-const express = require("express");
 
 const app = express();
 const T = new TwitterApi({
@@ -105,16 +104,16 @@ const main = async () => {
 
 main();
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-  res.status(200).send("Hello");
-});
+// app.get("/", (req, res) => {
+//   res.status(200).send("Hello");
+// });
 
-app.listen(PORT, (err) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log("Server established at http://0.0.0.0:" + PORT);
-  }
-});
+// app.listen(PORT, (err) => {
+//   if (err) {
+//     console.error(err);
+//   } else {
+//     console.log("Server established at http://0.0.0.0:" + PORT);
+//   }
+// });
